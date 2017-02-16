@@ -8,5 +8,5 @@ function moveRight(){
 }
 img.onclick=function (){
     //var interval=setInterval(moveRight,50);
-    img.style.marginleft='100px';
+    img.style.marginLeft='100px';
 }
