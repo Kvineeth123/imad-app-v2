@@ -7,7 +7,7 @@ app.use(morgan('combined'));
 
 var articles={
 	'article-one':{
-	    title:`article-one-vineeth sai kareti`,
+	    title:'article-one-vineeth sai kareti',
 	    heading:'this is my heading',
 	    content:`
 	    <p> this is my paragraph</p>
