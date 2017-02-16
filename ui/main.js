@@ -29,11 +29,29 @@ counter.onclick=function(){
 };
 
 //submitting name
+var nameinput=document.getElementById('name');
+var n1=nameinput.value;
 var b1 = document.getElementById('btn');
 b1.onclick = function() {
-    var nameval = document.getElementById('name');
-    var n1=nameval.value;
-    list='<li>'+n1+'<li>';
-    var ul = document.getElementById('nl');
-    ul.innerHTML=list;
+
+   var request = new XMLHttpRequest();
+   request.onreadystatechange = function(){
+       if(request.readyState===XMLHttpRequest.DONE){
+           if(request.status===200){
+               var names=request.responseText;
+               names=JSON.parse(names);
+               var list='';
+               for(var i=0;i<names.lenght;i++)
+               {
+                   list='<li>'+names[i]+'<li>';
+               }
+                var ul=document.getElementById('nl');
+                ul.innerHTML=list ;          
+                
+           }
+           
+       }
+   };
+   request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1);
+   request.send(null);
 };
