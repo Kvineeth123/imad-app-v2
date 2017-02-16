@@ -39,7 +39,7 @@ b1.onclick = function() {
                var names=request.responseText;
                names=JSON.parse(names);
                var list='';
-               for(var i=0;i<names.lenght;i++)
+               for(var i=0;i<names.lenghth;i++)
                {
                    list+='<li>'+ names[i] + '<li>';
                }
