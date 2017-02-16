@@ -29,10 +29,10 @@ counter.onclick=function(){
 };
 
 //submitting name
-var nameval = document.getElementById('name');
-var n1=nameval.value;
 var b1 = document.getElementById('btn');
 b1.onclick = function() {
+    var nameval = document.getElementById('name');
+    var n1=nameval.value;
     list='<li>'+n1+'<li>';
     var ul = document.getElementById('nl');
     ul.innerHTML=list;
