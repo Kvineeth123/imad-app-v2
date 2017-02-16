@@ -53,7 +53,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:article',function(req,res){
-  var an = req.parameter.article;
+  var an = req.params.article;
   res.send(createtemplate(articles[an]));
 });
 
