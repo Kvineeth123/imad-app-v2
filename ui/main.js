@@ -3,7 +3,7 @@ console.log('Loaded!');
 var img=document.getElementById('img');
 var marginleft=0;
 var interval=setInterval(moveRight,50);
-function moveRight(){
+img.onclick=function moveRight(){
     marginleft=marginleft+5;
     img.style.marginleft=marginleft+'px';
 }
