@@ -52,6 +52,6 @@ b1.onclick = function() {
            
        }
    };
-   request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1);
+   request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1,true);
    request.send(null);
 };
