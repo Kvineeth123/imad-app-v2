@@ -31,7 +31,6 @@ counter.onclick=function(){
 //submitting name
 var b1 = document.getElementById('btn');
 b1.onclick = function() {
-    alert('clicked');
    var request = new XMLHttpRequest();
    request.onreadystatechange = function(){
        if(request.readyState===XMLHttpRequest.DONE){
