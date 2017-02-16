@@ -41,16 +41,16 @@ b1.onclick = function() {
                var list='';
                for(var i=0;i<names.lenght;i++)
                {
-                   list='<li>'+names[i]+'<li>';
+                   list='<li>'+ names[i] + '<li>';
                }
-                var ul=document.getElementById('nl');
+                var ul=document.getElementById('namelisl');
                 ul.innerHTML=list ;          
            }
            
        }
    };
    var nameinput=document.getElementById('name');
-    var n1=nameinput.value;
+   var n1=nameinput.value;
    request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1,true);
    request.send(null);
 };
