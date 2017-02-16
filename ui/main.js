@@ -1,6 +1,9 @@
 console.log('Loaded!');
 //changed code
-
-alert('testing');
-var element = document.getElementById('myid');
-element.innerHTML='chnaged value';
+var img=document.getElementById('img');
+var marginleft=0;
+var interval=setInterval(moveRight,50);
+function moveRight(){
+    marginleft=marginleft+5;
+    img.style.marginleft=marginleft+'px';
+}
