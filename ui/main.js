@@ -27,3 +27,13 @@ counter.onclick=function(){
    request.open('GET','http://kvineeth123.imad.hasura-app.io/counter');
    request.send(null);
 };
+
+//submitting name
+var nameval = document.getElementById('name');
+var n1=nameval.value;
+var b1 = document.getElementById('btn');
+b1.onclick = function() {
+    list='<li>'+n1+'<li>';
+    var ul = document.getElementById('nl');
+    ul.innerHTML=list;
+};
