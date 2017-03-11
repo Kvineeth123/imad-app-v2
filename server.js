@@ -62,6 +62,19 @@ app.get('/submit-name',function(req,res){
     names.push(name);
     res.send(JSON.stringify(names));
 });
+var pool = new Pool(config);
+
+app.get('/test-db',function(req,res){
+
+    pool.query('SELECT * FROM USER',function(err,res) {
+        if(err){
+            res.status(500).send(err.toString());
+        }
+        else{
+                res.send(JSON.stringify(res));
+        }
+    });    
+});
 var counter=0;
 app.get('/counter',function(req,res){
     counter=counter+1;
