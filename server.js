@@ -91,8 +91,12 @@ app.get('/articles/:articleName',function(req,res){
           res.status(400).send(err.toString());
       }
       else{
-          var articledata = result.rows[0];
-        res.send(createtemplate(articledata));     
+          if(result.rows.length===0){
+              res.status(400).send('Article not found');
+          }else{
+                     var articledata = result.rows[0];
+        res.send(createtemplate(articledata));   
+          }
       }
   });
 });
