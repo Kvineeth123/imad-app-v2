@@ -84,9 +84,17 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/:article',function(req,res){
-  var an = req.params.article;
-  res.send(createtemplate(articles[an]));
+app.get('/articles/:articleName',function(req,res){
+  var an = req.params.articleName;
+  pool.query('SELECT * FROM article WHERE title ='+an,function(err,result){
+      if(err){
+          res.status(400).send(err.toString());
+      }
+      else{
+          var articledata = result.rows[0];
+        res.send(createtemplate(articledata));     
+      }
+  });
 });
 
 app.get('/ui/style.css', function (req, res) {
