@@ -93,6 +93,22 @@ app.get('/hash/:input',function(req,res){
    var hashval = hash(req.params.input,"thiskdna;lkncdskankjsJCndsa");
    res.send(hashval);
 });
+app.post('/create-user',function(req,res){
+   var username = req.body.username;
+   var password = req.body.password;
+   var salt = randomBytes(128).toString('hex');
+   var dbString = hash(password,salt);
+   pool.query('INSERT INTO users (username,password) VALUES ($1,$2)',[username,dbString],function(err,result){
+       if(err){
+          res.status(400).send(err.toString());
+      }
+      else{
+          res.send("user"+username+"succesfully creted");
+      }
+   });
+});
+
+
 app.get('/articles/:articleName',function(req,res){
   pool.query("SELECT * FROM article WHERE title ='"+req.params.articleName+"'",function(err,result){
       if(err){
