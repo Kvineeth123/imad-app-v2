@@ -65,7 +65,7 @@ b1.onclick = function() {
            }else if(request.status===403){
                 alert('database error');
                
-           }else if(request.status===500){
+           }else if(request.status===400){
                 alert('error in database');
            }
            
