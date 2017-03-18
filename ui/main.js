@@ -63,7 +63,7 @@ b1.onclick = function() {
            if(request.status===200){
                 alert('logged in successfully');     
            }else if(request.status===403){
-                alert('database error');
+                alert('username/password error');
                
            }else if(request.status===400){
                 alert('error in database');
