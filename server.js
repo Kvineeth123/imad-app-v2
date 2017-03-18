@@ -147,8 +147,12 @@ app.get('/check-login',function(req,res){
    if(req.session && req.session.auth && req.session.auth.userid){
        res.send(req.session.auth.userid.toString());
    } else {
-       res.send("user not logged in");
+       res.send("not logged in");
    }
+});
+app.get('/logout',function(req,res){
+   delete req.session.auth ;
+   res.send("logged out");
 });
 app.get('/articles/:articleName',function(req,res){
   pool.query("SELECT * FROM article WHERE title ='"+req.params.articleName+"'",function(err,result){
