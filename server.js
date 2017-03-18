@@ -4,6 +4,8 @@ var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+
 var config = {
     user : 'kvineeth123',
     database: 'kvineeth123',
@@ -15,6 +17,11 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
+app.use(session({
+	secret: "somerfaknlskavdf;av",
+	cookie : {maxAge: 1000*30*60*60*24}
+}));
+
 var articles={
 	'article-one':{
 	    title:'article-one-vineeth sai kareti',
@@ -125,6 +132,7 @@ app.post('/login',function(req,res){
               var salt = dbString.split('$')[1];
               var hashedval = hash(password,salt);
               if(hashedval===dbString){
+                  req.session.auth={userid: result.rows[0].id};
                   res.send("user successfully logged in");
               }
               else{
@@ -135,7 +143,13 @@ app.post('/login',function(req,res){
    });
 });
 
-
+app.get('/check-login',function(req,res){
+   if(req.session && req.session.auth && req.session.auth.userid){
+       res.send(req.session.auth.userid.toString());
+   } else {
+       res.send("user not logged in");
+   }
+});
 app.get('/articles/:articleName',function(req,res){
   pool.query("SELECT * FROM article WHERE title ='"+req.params.articleName+"'",function(err,result){
       if(err){
