@@ -108,6 +108,33 @@ app.post('/create-user',function(req,res){
    });
 });
 
+app.post('/login',function(req,res){
+   var username = req.body.username;
+   var password = req.body.password;
+   pool.query('SELECT * FROM users WHERE username= $1',[username],function(err,result){
+       if(err){
+          res.status(400).send(err.toString());
+      }
+      else{
+          if(result.rows.length===0){
+              res.send(403).send("username/password invalid");
+          }
+          else
+          {
+              var dbString = reult.rows[0].password;
+              var salt=dbString.split('$')[2];
+              var hashedval = hash(password,salt);
+              if(hashedval===dbString.split('$')[3]){
+                  res.send("user successfully logged in");
+              }
+              else{
+                  res.send(403).send("username/password invalid");
+              }
+          }
+      }
+   });
+});
+
 
 app.get('/articles/:articleName',function(req,res){
   pool.query("SELECT * FROM article WHERE title ='"+req.params.articleName+"'",function(err,result){
