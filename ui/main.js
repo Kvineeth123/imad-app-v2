@@ -29,7 +29,7 @@ counter.onclick=function(){
 };
 
 //submitting name
-var b1 = document.getElementById('btn');
+/*var b1 = document.getElementById('btn');
 b1.onclick = function() {
    var request = new XMLHttpRequest();
    request.onreadystatechange = function(){
@@ -52,4 +52,30 @@ b1.onclick = function() {
    var n1=nameinput.value;
    request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1,true);
    request.send(null);
+};
+*/
+
+var b1 = document.getElementById('btn');
+b1.onclick = function() {
+   var request = new XMLHttpRequest();
+   request.onreadystatechange = function(){
+       if(request.readyState===XMLHttpRequest.DONE){
+           if(request.status===200){
+                alert('logged in successfully');     
+           }else if(request.status===403){
+                alert('database error');
+               
+           }else if(request.status===500){
+                alert('error in database');
+           }
+           
+       }
+   };
+   var username=document.getElementById('username').value;
+   var password=document.getElementById('password').value;
+   console.log(username);
+   console.log(password);
+   request.open('POST','http://kvineeth123.imad.hasura-app.io/login',true);
+   request.setRequestHeader('Content-Type','aplication/json');
+   request.send(JSON.stringify({username:username , password:password}));
 };
