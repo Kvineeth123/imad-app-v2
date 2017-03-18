@@ -124,7 +124,7 @@ app.post('/login',function(req,res){
               var dbString = reult.rows[0].password;
               var salt=dbString.split('$')[2];
               var hashedval = hash(password,salt);
-              if(hashedval===dbString.split('$')[3]){
+              if(hashedval===dbString){
                   res.send("user successfully logged in");
               }
               else{
