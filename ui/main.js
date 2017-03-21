@@ -54,7 +54,7 @@ b1.onclick = function() {
    request.send(null);
 };
 */
-
+// log in function
 var b1 = document.getElementById('btn');
 b1.onclick = function() {
    var request = new XMLHttpRequest();
