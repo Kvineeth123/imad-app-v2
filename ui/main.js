@@ -55,7 +55,7 @@ b1.onclick = function() {
 };
 */
 // log in function
-var b1 = document.getElementById('btn');
+var b1 = document.getElementById('login');
 b1.onclick = function() {
    var request = new XMLHttpRequest();
    request.onreadystatechange = function(){
@@ -76,6 +76,28 @@ b1.onclick = function() {
    console.log(username);
    console.log(password);
    request.open('POST','http://kvineeth123.imad.hasura-app.io/login',true);
+   request.setRequestHeader('Content-Type','application/json');
+   request.send(JSON.stringify({username:username, password:password}));
+};
+var b2 = document.getElementById('reg');
+b2.onclick = function() {
+   var request = new XMLHttpRequest();
+   request.onreadystatechange = function(){
+       if(request.readyState===XMLHttpRequest.DONE){
+           if(request.status===200){
+                alert('user created successfully');     
+           }else if(request.status===403){
+                alert('error in creating user try again');
+               
+           }
+           
+       }
+   };
+   var username=document.getElementById('username').value;
+   var password=document.getElementById('password').value;
+   console.log(username);
+   console.log(password);
+   request.open('POST','http://kvineeth123.imad.hasura-app.io/create-user',true);
    request.setRequestHeader('Content-Type','application/json');
    request.send(JSON.stringify({username:username, password:password}));
 };
