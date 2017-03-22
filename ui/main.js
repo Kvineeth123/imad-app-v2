@@ -107,8 +107,8 @@ b2.onclick = function() {
 function loadLoggedInUser (username) {
     var loginArea = document.getElementById('login_area');
     loginArea.innerHTML = `
-        <h3> Hi <i>${username}</i></h3>
-        <a href="/logout">Logout</a>
+        <center><h3> Hi <i>${username}</i></h3>
+        <a href="/logout">Logout</a></center>
     `;
 }
 
@@ -121,7 +121,7 @@ function loadLogin () {
                 loadLoggedInUser(this.responseText);
             } else {
                 var loginArea = document.getElementById('login_area');
-                loginArea.innerHTML = '<h3> User not logged in </h3>';
+                loginArea.innerHTML = '<center><h3> User not logged in </h3></center>';
             }
         }
     };
