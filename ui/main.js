@@ -10,7 +10,7 @@ img.onclick=function (){
     var interval=setInterval(moveRight,50);
 };
 //counter
-var counter=document.getElementById('counter');
+/*var counter=document.getElementById('counter');
 counter.onclick=function(){
    // count=count+1;
    var request = new XMLHttpRequest();
@@ -27,7 +27,7 @@ counter.onclick=function(){
    request.open('GET','http://kvineeth123.imad.hasura-app.io/counter');
    request.send(null);
 };
-
+*/
 //submitting name
 /*var b1 = document.getElementById('btn');
 b1.onclick = function() {
@@ -79,6 +79,7 @@ b1.onclick = function() {
    request.setRequestHeader('Content-Type','application/json');
    request.send(JSON.stringify({username:username, password:password}));
 };
+//register function
 var b2 = document.getElementById('reg');
 b2.onclick = function() {
    var request = new XMLHttpRequest();
@@ -101,3 +102,34 @@ b2.onclick = function() {
    request.setRequestHeader('Content-Type','application/json');
    request.send(JSON.stringify({username:username, password:password}));
 };
+//loading login details
+
+function loadLoggedInUser (username) {
+    var loginArea = document.getElementById('login_area');
+    loginArea.innerHTML = `
+        <h3> Hi <i>${username}</i></h3>
+        <a href="/logout">Logout</a>
+    `;
+}
+
+function loadLogin () {
+    // Check if the user is already logged in
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                loadLoggedInUser(this.responseText);
+            } else {
+                var loginArea = document.getElementById('login_area');
+                loginArea.innerHTML = '<h3> User not logged in </h3>';
+            }
+        }
+    };
+    
+    request.open('GET', '/check-login', true);
+    request.send(null);
+}
+
+loadLogin();
+
+
