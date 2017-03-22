@@ -153,7 +153,7 @@ app.get('/check-login',function(req,res){
            }
        });
    } else {
-       res.send("not logged in");
+       res.status(400).send("not logged in");
    }
 });
 app.get('/logout',function(req,res){
