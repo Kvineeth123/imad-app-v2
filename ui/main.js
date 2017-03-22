@@ -110,6 +110,8 @@ function loadLoggedInUser (username) {
         <center><h3> Hi <i>${username}</i></h3>
         <a href="/logout">Logout</a></center>
     `;
+    var loginForm = document.getElementById('loginform');
+    loginform.innerHTML='';
 }
 
 function loadLogin () {
