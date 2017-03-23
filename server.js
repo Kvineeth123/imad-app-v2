@@ -72,6 +72,15 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+app.get('/ui/:fileName', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', req.params.fileName));
+});
+
+var counter=0;
+app.get('/counter',function(req,res){
+    counter=counter+1;
+   res.send(counter.toString()); 
+});
 
 function hash (input, salt) {
     // How do we create a hash?
@@ -228,9 +237,6 @@ app.get('/articles/:articleName', function (req, res) {
   });
 });
 
-app.get('/ui/:fileName', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', req.params.fileName));
-});
 
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
