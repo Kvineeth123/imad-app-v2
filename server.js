@@ -39,7 +39,7 @@ function createTemplate (data) {
       </head> 
       <body>
             <h3 id="fix">MyWebapp</h3>
-          <div class="container">
+          <div class="container" id="newpage">
               <div>
                   <a href="/">Home</a>
               </div>
