@@ -171,7 +171,7 @@ app.get('/get-articles', function (req, res) {
 app.get('/get-comments/:articleName', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT comment.*, users.username FROM article, comment, users WHERE article.title = $1 AND article.id = comments.article_id AND comments.user_id = users.id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
+   pool.query('SELECT comments.*, users.username FROM article, comments, users WHERE article.title = $1 AND article.id = comments.article_id AND comments.user_id = users.id ORDER BY comments.timestamp DESC', [req.params.articleName], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -194,7 +194,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
                     var articleId = result.rows[0].id;
                     // Now insert the right comment for this article
                     pool.query(
-                        "INSERT INTO comment (comment, article_id, user_id) VALUES ($1, $2, $3)",
+                        "INSERT INTO comments (comment, article_id, user_id) VALUES ($1, $2, $3)",
                         [req.body.comment, articleId, req.session.auth.userId],
                         function (err, result) {
                             if (err) {
