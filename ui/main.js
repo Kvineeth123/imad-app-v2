@@ -1,132 +1,91 @@
-console.log('Loaded!');
-//changed code
-/*var img=document.getElementById('i1');
-var marginleft=0;
-function moveRight(){
-    marginleft=marginleft+5;
-    img.style.marginLeft=marginleft+'px';
-}
-img.onclick=function (){
-    var interval=setInterval(moveRight,50);
-};
-*/
-//counter
-/*var counter=document.getElementById('counter');
-counter.onclick=function(){
-   // count=count+1;
-   var request = new XMLHttpRequest();
-   request.onreadystatechange = function(){
-       if(request.readyState===XMLHttpRequest.DONE){
-           if(request.status===200){
-               var count=request.responseText;
-                var span=document.getElementById('count');
-                span.innerHTML=count.toString();           
-           }
-           
-       }
-   };
-   request.open('GET','http://kvineeth123.imad.hasura-app.io/counter');
-   request.send(null);
-};
-*/
-//submitting name
-/*var b1 = document.getElementById('btn');
-b1.onclick = function() {
-   var request = new XMLHttpRequest();
-   request.onreadystatechange = function(){
-       if(request.readyState===XMLHttpRequest.DONE){
-           if(request.status===200){
-               var names=request.responseText;
-               names=JSON.parse(names);
-               var list='';
-               for(var i=0;i<names.length;i++)
-               {
-                   list+='<li>'+ names[i] + '<li>';
-               }
-                var ul=document.getElementById('namelist');
-                ul.innerHTML=list ;          
-           }
-           
-       }
-   };
-   var nameinput=document.getElementById('name');
-   var n1=nameinput.value;
-   request.open('GET','http://kvineeth123.imad.hasura-app.io/submit-name?name='+n1,true);
-   request.send(null);
-};
-*/
-//loading login form
-function loadloginform(){
-            var loginArea = document.getElementById('login_area');
-            loginArea.innerHTML = `<center><h3> User not logged in </h3>
-            <form>
-            Username:<input type="text" id="username" size="20"/><br/>
-            Password:<input type="password" id="password" size="20"/><br/>
-            <input type="submit" id="login" value="login"/>
-            <input type="submit" id="reg" value="register"/>
-            </form></center>`;
-            // log in function
-                var b1 = document.getElementById('login');
-                b1.onclick = function() {
-                    alert("clicked detected");
-                   var request = new XMLHttpRequest();
-                   request.onreadystatechange = function(){
-                       if(request.readyState===XMLHttpRequest.DONE){
-                           if(request.status===200){
-                                alert('logged in successfully');     
-                           }else if(request.status===403){
-                                alert('username/password error');
-                               
-                           }else if(request.status===400){
-                                alert('error in database');
-                           }
-                           
-                       }
-                       loadLogin();
-                   };
-                   var username=document.getElementById('username').value;
-                   var password=document.getElementById('password').value;
-                   console.log(username);
-                   console.log(password);
-                   request.open('POST','http://kvineeth123.imad.hasura-app.io/login',true);
-                   request.setRequestHeader('Content-Type','application/json');
-                   request.send(JSON.stringify({username:username, password:password}));
-                };
-                //register function
-                var b2 = document.getElementById('reg');
-                b2.onclick = function() {
-                    alert("clicked detected");
-                   var request = new XMLHttpRequest();
-                   request.onreadystatechange = function(){
-                       if(request.readyState===XMLHttpRequest.DONE){
-                           if(request.status===200){
-                                alert('user created successfully');     
-                           }else if(request.status===403){
-                                alert('error in creating user try again');
-                               
-                           }
-                           
-                       }
-                   };
-                   var username=document.getElementById('username').value;
-                   var password=document.getElementById('password').value;
-                   console.log(username);
-                   console.log(password);
-                   request.open('POST','http://kvineeth123.imad.hasura-app.io/create-user',true);
-                   request.setRequestHeader('Content-Type','application/json');
-                   request.send(JSON.stringify({username:username, password:password}));
-                };
+
+function loadLoginForm () {
+    var loginHtml = `
+        <h3>Login/Register to unlock awesome features</h3>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" />
+        <br/><br/>
+        <input type="submit" id="login_btn" value="Login" />
+        <input type="submit" id="register_btn" value="Register" />
+        `;
+    document.getElementById('login_area').innerHTML = loginHtml;
     
+    // Submit username/password to login
+    var submit = document.getElementById('login_btn');
+    submit.onclick = function () {
+        // Create a request object
+        var request = new XMLHttpRequest();
+        
+        // Capture the response and store it in a variable
+        request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+              // Take some action
+              if (request.status === 200) {
+                  submit.value = 'Sucess!';
+              } else if (request.status === 403) {
+                  submit.value = 'Invalid credentials. Try again?';
+              } else if (request.status === 500) {
+                  alert('Something went wrong on the server');
+                  submit.value = 'Login';
+              } else {
+                  alert('Something went wrong on the server');
+                  submit.value = 'Login';
+              }
+              loadLogin();
+          }  
+          // Not done yet
+        };
+        
+        // Make the request
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        console.log(username);
+        console.log(password);
+        request.open('POST', '/login', true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify({username: username, password: password}));  
+        submit.value = 'Logging in...';
+        
+    };
+    
+    var register = document.getElementById('register_btn');
+    register.onclick = function () {
+        // Create a request object
+        var request = new XMLHttpRequest();
+        
+        // Capture the response and store it in a variable
+        request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+              // Take some action
+              if (request.status === 200) {
+                  alert('User created successfully');
+                  register.value = 'Registered!';
+              } else {
+                  alert('Could not register the user');
+                  register.value = 'Register';
+              }
+          }
+        };
+        
+        // Make the request
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        console.log(username);
+        console.log(password);
+        request.open('POST', '/create-user', true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify({username: username, password: password}));  
+        register.value = 'Registering...';
+    
+    };
 }
-//loading login details
+
 function loadLoggedInUser (username) {
     var loginArea = document.getElementById('login_area');
     loginArea.innerHTML = `
-        <center><h3> Hi <i>${username}</i></h3>
-        <a href="/logout">Logout</a></center>
+        <h3> Hi <i>${username}</i></h3>
+        <a href="/logout">Logout</a>
     `;
-    var loginForm = document.getElementById('loginform');
-    loginform.innerHTML='';
 }
 
 function loadLogin () {
@@ -137,7 +96,7 @@ function loadLogin () {
             if (request.status === 200) {
                 loadLoggedInUser(this.responseText);
             } else {
-                loadloginform();
+                loadLoginForm();
             }
         }
     };
@@ -146,5 +105,35 @@ function loadLogin () {
     request.send(null);
 }
 
+function loadArticles () {
+        // Check if the user is already logged in
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            var articles = document.getElementById('articles');
+            if (request.status === 200) {
+                var content = '<ul>';
+                var articleData = JSON.parse(this.responseText);
+                for (var i=0; i< articleData.length; i++) {
+                    content += `<li>
+                    <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
+                    (${articleData[i].date.split('T')[0]})</li>`;
+                }
+                content += "</ul>";
+                articles.innerHTML = content;
+            } else {
+                articles.innerHTML('Oops! Could not load all articles!');
+            }
+        }
+    };
+    
+    request.open('GET', '/get-articles', true);
+    request.send(null);
+}
+
+
+// The first thing to do is to check if the user is logged in!
 loadLogin();
 
+// Now this is something that we could have directly done on the server-side using templating too!
+/*loadArticles();*/
