@@ -70,7 +70,7 @@ b1.onclick = function() {
            }
            
        }
-       loadLogin();
+       /*loadLogin();*/
    };
    var username=document.getElementById('username').value;
    var password=document.getElementById('password').value;
@@ -104,7 +104,7 @@ b2.onclick = function() {
    request.send(JSON.stringify({username:username, password:password}));
 };
 //loading login details
-
+/*
 function loadLoggedInUser (username) {
     var loginArea = document.getElementById('login_area');
     loginArea.innerHTML = `
@@ -134,5 +134,5 @@ function loadLogin () {
 }
 
 loadLogin();
-
+*/
 
