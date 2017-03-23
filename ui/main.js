@@ -1,3 +1,22 @@
+//counter
+var counter=document.getElementById('counter');
+counter.onclick=function(){
+   // count=count+1;
+   var request = new XMLHttpRequest();
+   request.onreadystatechange = function(){
+       if(request.readyState===XMLHttpRequest.DONE){
+           if(request.status===200){
+               var count=request.responseText;
+                var span=document.getElementById('count');
+                span.innerHTML=count.toString();           
+           }
+           
+       }
+   };
+   request.open('GET','http://kvineeth123.imad.hasura-app.io/counter');
+   request.send(null);
+};
+
 function loadLoginForm () {
     var loginHtml = `
         <center><h3>Login to comment on articles</h3>
@@ -23,7 +42,8 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  submit.value = 'Sucess!';
+                  submit.value = 'Success!';
+                  alert('user loggged in successfully!');
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
@@ -139,4 +159,7 @@ loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
 loadArticles();
+
+
+//comments
 
