@@ -17,17 +17,15 @@ counter.onclick=function(){
    request.send(null);
 };
 
+
 function loadLoginForm () {
     var loginHtml = `
-        <center><h3>Login to comment on articles</h3>
-                <h3>not having an account? then register</h3>
-        <form>
-        Username:<input type="text" id="username"/><br/>
-        Password:<input type="password" id="password" />
+        <h3>Login/Register to unlock awesome features</h3>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" />
         <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
         <input type="submit" id="register_btn" value="Register" />
-        </form></center>
         `;
     document.getElementById('login_area').innerHTML = loginHtml;
     
@@ -42,14 +40,14 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  submit.value = 'Success!';
+                  submit.value = 'Sucess!';
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
-                  alert('Something went wrong on the server with 500');
+                  alert('Something went wrong on the server');
                   submit.value = 'Login';
               } else {
-                  alert('Something went wrong on the server with nothing');
+                  alert('Something went wrong on the server');
                   submit.value = 'Login';
               }
               loadLogin();
@@ -79,6 +77,7 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
+                  alert('User created successfully');
                   register.value = 'Registered!';
               } else {
                   alert('Could not register the user');
@@ -139,10 +138,10 @@ function loadArticles () {
                     <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
                     (${articleData[i].date.split('T')[0]})</li>`;
                 }
-                content += "</ul>";
+                content += "</ul>"
                 articles.innerHTML = content;
             } else {
-                articles.innerHTML('Oops! Could not load all articles!');
+                articles.innerHTML('Oops! Could not load all articles!')
             }
         }
     };
@@ -157,8 +156,4 @@ loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
 loadArticles();
-
-
-//comments
-
 
