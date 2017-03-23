@@ -1,4 +1,4 @@
-
+var currentArticleTitle = window.location.pathname.split('/')[2];
 function loadCommentForm () {
     var commentFormHtml = `
         <h5>Submit a comment</h5>
@@ -55,6 +55,13 @@ function loadLogincomment () {
     request.send(null);
 }
 
+function escapeHTML (text)
+{
+    var $text = document.createTextNode(text);
+    var $div = document.createElement('div');
+    $div.appendChild($text);
+    return $div.innerHTML;
+}
 
 function loadComments () {
         // Check if the user is already logged in
