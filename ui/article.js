@@ -1,4 +1,5 @@
 var currentArticleTitle = window.location.pathname.split('/')[2];
+
 function loadCommentForm () {
     var commentFormHtml = `
         <h5>Submit a comment</h5>
@@ -65,6 +66,7 @@ function escapeHTML (text)
 
 function loadComments () {
         // Check if the user is already logged in
+        alert("loadcomments function");
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
@@ -93,6 +95,6 @@ function loadComments () {
     request.send(null);
 }
 
-loadlogincomment();
+loadLogincomment();
 
 loadComments();
