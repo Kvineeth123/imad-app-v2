@@ -20,12 +20,15 @@ counter.onclick=function(){
 
 function loadLoginForm () {
     var loginHtml = `
-        <h3>Login/Register to unlock awesome features</h3>
-        <input type="text" id="username" placeholder="username" />
-        <input type="password" id="password" />
+        <center><h3>Login to comment on articles</h3>
+        <h3>not having an account? then register</h3>
+        <form>
+        Username:<input type="text" id="username"/><br/>
+        Password:<input type="password" id="password" />
         <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
         <input type="submit" id="register_btn" value="Register" />
+        </form></center>
         `;
     document.getElementById('login_area').innerHTML = loginHtml;
     
