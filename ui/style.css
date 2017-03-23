@@ -2,11 +2,14 @@ body {
     font-family: sans-serif;
     background-color: lightgrey;
     margin-top: 75px;
+    background-image:url(/ui/madi.png);
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
 #fix{
     position:fixed;
-    color:rgb(135, 232, 9);
+    color:rgb(214, 8, 8);
     top:20px;
     left:20px;
 }
