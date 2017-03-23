@@ -38,8 +38,8 @@ function createTemplate (data) {
           <link href="/ui/style.css" rel="stylesheet" />
       </head> 
       <body>
-         <h3 id="fix">MyWebapp</h3>
-          <div class="container" id="newpage">
+            <h3 id="fix">MyWebapp</h3>
+          <div class="container">
               <div>
                   <a href="/">Home</a>
               </div>
@@ -70,16 +70,6 @@ function createTemplate (data) {
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
-
-var counter=0;
-app.get('/counter',function(req,res){
-    counter=counter+1;
-   res.send(counter.toString()); 
-});
-
-app.get('/ui/:fileName', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', req.params.fileName));
 });
 
 
@@ -237,6 +227,11 @@ app.get('/articles/:articleName', function (req, res) {
     }
   });
 });
+
+app.get('/ui/:fileName', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', req.params.fileName));
+});
+
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
 app.listen(8080, function () {
