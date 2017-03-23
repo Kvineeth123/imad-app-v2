@@ -67,6 +67,7 @@ function loadloginform(){
             // log in function
                 var b1 = document.getElementById('login');
                 b1.onclick = function() {
+                    alert("clicked detected");
                    var request = new XMLHttpRequest();
                    request.onreadystatechange = function(){
                        if(request.readyState===XMLHttpRequest.DONE){
@@ -93,6 +94,7 @@ function loadloginform(){
                 //register function
                 var b2 = document.getElementById('reg');
                 b2.onclick = function() {
+                    alert("clicked detected");
                    var request = new XMLHttpRequest();
                    request.onreadystatechange = function(){
                        if(request.readyState===XMLHttpRequest.DONE){
