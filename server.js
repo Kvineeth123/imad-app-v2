@@ -38,7 +38,8 @@ function createTemplate (data) {
           <link href="/ui/style.css" rel="stylesheet" />
       </head> 
       <body>
-          <div class="container">
+         <h3 id="fix">MyWebapp</h3>
+          <div class="container" id="newpage">
               <div>
                   <a href="/">Home</a>
               </div>
