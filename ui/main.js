@@ -1,33 +1,12 @@
-//counter
-var counter=document.getElementById('counter');
-counter.onclick=function(){
-   // count=count+1;
-   var request = new XMLHttpRequest();
-   request.onreadystatechange = function(){
-       if(request.readyState===XMLHttpRequest.DONE){
-           if(request.status===200){
-               var count=request.responseText;
-                var span=document.getElementById('count');
-                span.innerHTML=count.toString();           
-           }
-           
-       }
-   };
-   request.open('GET','http://kvineeth123.imad.hasura-app.io/counter');
-   request.send(null);
-};
 
 function loadLoginForm () {
     var loginHtml = `
-        <center><h3>Login to comment on articles</h3>
-                <h3>not having an account? then register</h3>
-        <form>
-        Username:<input type="text" id="username"/><br/>
-        Password:<input type="password" id="password" />
+        <h3>Login/Register to unlock awesome features</h3>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" />
         <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
         <input type="submit" id="register_btn" value="Register" />
-        </form></center>
         `;
     document.getElementById('login_area').innerHTML = loginHtml;
     
@@ -42,8 +21,7 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  submit.value = 'Success!';
-                  alert('user loggged in successfully!');
+                  submit.value = 'Sucess!';
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
@@ -159,7 +137,3 @@ loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
 loadArticles();
-
-
-//comments
-
