@@ -3,13 +3,12 @@ function loadLoginForm () {
     var loginHtml = `
         <center><h3>Login to comment on articles</h3>
                 <h3>not having an account? then register</h3>
-        <form>
-        Username:<input type="text" id="username"/><br/>
-        Password:<input type="password" id="password" />
+        Username:<input type="text" id="username" placeholder="username"/><br/>
+        Password:<input type="password" id="password" placeholder="password" />
         <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
         <input type="submit" id="register_btn" value="Register" />
-        </form></center>
+        </center>
         `;
     document.getElementById('login_area').innerHTML = loginHtml;
     
